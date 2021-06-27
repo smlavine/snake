@@ -2,7 +2,7 @@
 
 include config.mk
 
-CFILES = snake.c
+CFILES = main.c
 HFILES = rogueutil.h
 
 all: options snake
