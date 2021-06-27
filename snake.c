@@ -35,6 +35,9 @@ void draw_border(void);
 void draw_snake(char);
 void quit(int);
 
+/* Draw a border around the parts of the play field that are open to the rest
+ * of the terminal.
+ */
 void
 draw_border(void)
 {
