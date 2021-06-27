@@ -164,6 +164,32 @@ main(int argc, char *argv[])
 	for (;;) {
 
 		switch (nb_getch()) {
+		case '\033':
+			/* Pressing an arrow key sends the sequence of
+			 * ^[ (escape, '\033')
+			 * [
+			 * A B C D (for up, down, right, or left, respectively)
+			 */
+
+			/* Using blocking getch here also effectively pauses
+			 * the game when 'ESC' is pressed on its own.
+			 */
+			if (getch() != '[') break;
+			switch (getch()) {
+			case 'A':
+				up();
+				break;
+			case 'B':
+				down();
+				break;
+			case 'C':
+				right();
+				break;
+			case 'D':
+				left();
+				break;
+			}
+			break;
 		case 'w':
 		case 'k':
 			up();
