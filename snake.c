@@ -31,9 +31,21 @@ int snakelen;
 Point berries[(WIDTH + HEIGHT)/8]; /* 1/4 the average of WIDTH and HEIGHT. */
 int berrieslen = (WIDTH + HEIGHT)/8;
 
+void down(void);
 void draw_border(void);
 void draw_snake(char);
+void left(void);
 void quit(int);
+void right(void);
+void up(void);
+
+/* Change the snake's direction to down. */
+void
+down(void)
+{
+	xv = 0;
+	yv = 1;
+}
 
 /* Draw a border around the parts of the play field that are open to the rest
  * of the terminal.
@@ -54,6 +66,25 @@ draw_border(void)
 	}
 
 	fflush(stdout);
+}
+
+void
+draw_snake(char ch) {
+	int i;
+
+	for (i = 0; i < snakelen; i++) {
+		gotoxy(snake[i].x, snake[i].y);
+		setChar(ch);
+	}
+	fflush(stdout);
+}
+
+/* Change the snake's direction to left. */
+void
+left(void)
+{
+	xv = -1;
+	yv = 0;
 }
 
 /*
@@ -85,15 +116,20 @@ quit(int code)
 	}
 }
 
+/* Change the snake's direction to right. */
 void
-draw_snake(char ch) {
-	int i;
+right(void)
+{
+	xv = 1;
+	yv = 0;
+}
 
-	for (i = 0; i < snakelen; i++) {
-		gotoxy(snake[i].x, snake[i].y);
-		setChar(ch);
-	}
-	fflush(stdout);
+/* Change the snake's direction to up. */
+void
+up(void)
+{
+	xv = 0;
+	yv = -1;
 }
 
 int
@@ -130,23 +166,19 @@ main(int argc, char *argv[])
 		switch (nb_getch()) {
 		case 'w':
 		case 'k':
-			xv = 0;
-			yv = -1;
-			break;
-		case 'd':
-		case 'l':
-			xv = 1;
-			yv = 0;
+			up();
 			break;
 		case 's':
 		case 'j':
-			xv = 0;
-			yv = 1;
+			down();
+			break;
+		case 'd':
+		case 'l':
+			right();
 			break;
 		case 'a':
 		case 'h':
-			xv = -1;
-			yv = 0;
+			left();
 			break;
 		case 'q':
 			quit(EXIT_SUCCESS);
