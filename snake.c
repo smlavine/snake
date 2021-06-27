@@ -1,5 +1,5 @@
 /*
- * snake - A simple, terminal snake game
+ * snake - A small TUI snake game
  * Copyright (C) 2021 Sebastian LaVine <mail@smlavine.com>
  *
  * This program is free software: you can redistribute it and/or modify
